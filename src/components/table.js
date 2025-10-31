@@ -15,7 +15,7 @@ export function initTable(settings, onAction) {
   before.reverse().forEach((subName) => {
     // перебираем нужный массив идентификаторов
     root[subName] = cloneTemplate(subName); // клонируем и получаем объект, сохраняем в таблице
-    root.container.append(root[subName].container); // добавляем к таблице после (append) или до (prepend)
+    root.container.prepend(root[subName].container); // добавляем к таблице после (append) или до (prepend)
   });
   after.forEach((subName) => {
     root[subName] = cloneTemplate(subName);
@@ -31,7 +31,7 @@ export function initTable(settings, onAction) {
     setTimeout(onAction);
   });
 
-  root.container.addEventListener("submit", () => {
+  root.container.addEventListener("submit", (e) => {
     e.preventDefault();
     onAction(e.submitter);
   });
